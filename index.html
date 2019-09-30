@@ -7,17 +7,19 @@
     <img src="matrix.png">
     <script>
       $(function(){
-        var i=0;
-        $.get("data"+i+".json",function(result){
+        var i=1;
+        $.get("data0.json",function(result){
           $("#myname").text(result.myname);
           $("#mynumber").text(result.mynumber);
-          i=1;
         })
         $("#button").click(function(){
             $.get("data"+i+".json",function(result){
             $("#myname").text(result.myname);
             $("#mynumber").text(result.mynumber);
-            i=0;
+            if(i==1)  
+              i=0;
+            else
+              i=1;
           })
         })
       })
