@@ -3,13 +3,19 @@
   <body>
     <h1>我叫<span id="myname"></span>.</h1><img src="KQ.jpg" id="logo" style="BORDER-RADIUS:10px 20px 40px 80px">
       <p>我的学号是<span id="mynumber"></span>
-      </p>
+      </p><input type="button" id="button" value="下一个"><br>
     <img src="matrix.png">
     <script>
       $(function(){
-        $.get("data.json",function(result){
+        $.get("data0.json",function(result){
           $("#myname").text(result.myname);
           $("#mynumber").text(result.mynumber);
+        })
+        $("#button").click(function(){
+            $.get("data1.json",function(result){
+            $("#myname").text(result.myname);
+            $("#mynumber").text(result.mynumber);
+          })
         })
       })
     </script>
