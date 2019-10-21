@@ -7,18 +7,16 @@
     <img src="matrix.png">
     <script>
       $(function(){
-        var i=1;
-        $.get("data0.json",function(result){
+        var i=0;
+        function callback(result){
           $("#myname").text(result.myname);
-          $("#mynumber").text(result.mynumber);
-        })
-        $("#button").bind("click",function(){$.get("data"+i+".json",function(result){
-            $("#myname").text(result.myname);
             $("#mynumber").text(result.mynumber);
-            if(i==1)  
-              i=0;
-            else
-              i=1;})
+            if(i==1)  i=0;
+            else  i=1;
+        }
+        $.get("http://127.0.0.1:8585/data0.json",callback)
+        $("#button").bind("click",function(){
+          $.get("http://127.0.0.1:8585/data"+i+".json",callback)
         })
       })
     </script>
