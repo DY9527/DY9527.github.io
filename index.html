@@ -1,24 +1,32 @@
 <html>
-  <script src="jquery-3.4.1.js"></script>
-  <body>
-    <h1>我叫<span id="myname"></span>.</h1><img src="KQ.jpg" id="logo" style="BORDER-RADIUS:10px 20px 40px 80px">
-      <p>我的学号是<span id="mynumber"></span>
-      </p><input type="button" id="button" value="下一个"><br>
-    <img src="matrix.png">
-    <script>
-      $(function(){
-        var i=0;
-        function callback(result){
-          $("#myname").text(result.myname);
-            $("#mynumber").text(result.mynumber);
-            if(i==1)  i=0;
-            else  i=1;
-        }
-        $.get("http://127.0.0.1:8585/data0.json",callback)
-        $("#button").bind("click",function(){
-          $.get("http://127.0.0.1:8585/data"+i+".json",callback)
+<script src="jquery-3.4.1.js"></script>
+
+<body>
+  <h1>我叫<span id="myname"></span>.</h1><img src="KQ.jpg" id="logo" style="BORDER-RADIUS:10px 20px 40px 80px">
+  <p>我的学号是<span id="mynumber"></span>
+  </p><input type="button" id="button" value="下一个"><br>
+  <img src="matrix.png">
+  <script>
+    $(function () {
+      var i = 50;
+      function callback(result) {
+        $("#myname").text(result.myname);
+        $("#mynumber").text(result.mynumber);
+
+      }
+      $.post("http://10.30.201.75:8585/data.json", callback)
+      $("#button").bind("click", function () {
+        i++;
+        $.ajax("http://10.30.201."+i+":8585/data.json",{
+          type:"POST",
+          data:"name=admin",
+          success:callback
         })
+        //$.get("http://10.30.201."+i+":8585/data.json", callback)
+        if(i==90)i=50;
       })
-    </script>
-  </body>
+    })
+  </script>
+</body>
+
 </html>
