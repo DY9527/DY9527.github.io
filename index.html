@@ -6,6 +6,7 @@
   <p>我的学号是<span id="mynumber"></span>
   </p><input type="button" id="button" value="下一个"><br>
   <img src="matrix.png">
+  <a href="login.html">login</a>
   <script>
     $(function () {
       var i = 50;
@@ -14,11 +15,18 @@
         $("#mynumber").text(result.mynumber);
 
       }
-      $.post("http://10.30.201.75:8585/data.json", callback)
+      $.ajax("http://10.30.201.75:8585/data.json",{
+          type:"POST",
+          contentType:'application/json',
+          data:JSON.stringify({"name":"admin"}),
+          success:callback
+        })
+      //$.post("http://10.30.201.75:8585/data.json", callback)
       $("#button").bind("click", function () {
         i++;
         $.ajax("http://10.30.201."+i+":8585/data.json",{
           type:"POST",
+          contentType:'application/json',
           data:"name=admin",
           success:callback
         })

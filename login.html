@@ -1,0 +1,29 @@
+<html>
+<head>
+    <script src="jquery-3.4.1.js"></script>
+    
+</head>
+<body>
+    <input type="text" name="" id="name">
+    <input type="text" name="" id="pwd">
+    <input type="button" id="button" value="denglu">
+    <script>
+        $(function () {
+        
+          $("#button").click(function(){
+            $.ajax("http://127.0.0.1:8585/login",{
+              type:"POST",
+              contentType:'application/json',
+              data:JSON.stringify({"name":$("#name").val(),
+              "pwd":$("#pwd").val()}),
+              success:function(result){
+                  if(result.result=="success")
+                location.href="index.html"
+              }
+            })
+          })
+          
+        })
+      </script>
+</body>
+</html>
