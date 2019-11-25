@@ -5,8 +5,8 @@
 </head>
 <body>
     <input type="text" name="" id="name">
-    <input type="text" name="" id="pwd">
-    <input type="button" id="button" value="denglu">
+    <input type="password" name="" id="pwd">
+    <input type="button" id="button" value="登陆">
     <script>
         $(function () {
         
@@ -14,8 +14,8 @@
             $.ajax("http://127.0.0.1:8585/login",{
               type:"POST",
               contentType:'application/json',
-              data:JSON.stringify({"name":$("#name").val(),
-              "pwd":$("#pwd").val()}),
+              xhrFields:{withCredentials:true},
+              data:JSON.stringify({"name":$("#name").val(),"pwd":$("#pwd").val()}),
               success:function(result){
                   if(result.result=="success")
                 location.href="index.html"
