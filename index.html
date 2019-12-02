@@ -14,13 +14,13 @@
         $("#mynumber").text(result.mynumber);
 
       }
-      $.ajax("http://10.30.201.75:8585/userinfo",{
-          type:"POST",
-         // contentType:'application/json',
-          xhrFields:{withCredentials:true},
-         // data:JSON.stringify({"name":"admin"}),
-          success:callback
-        })
+      $.ajax("http://10.30.201.74:8585/userinfo", {
+        type: "POST",
+        // contentType:'application/json',
+        xhrFields: { withCredentials: true },
+        // data:JSON.stringify({"name":"admin"}),
+        success: callback
+      })
     })
   </script>
 </body>
