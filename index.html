@@ -4,15 +4,22 @@
 <body>
   <h1>我叫<span id="myname"></span>.</h1><img src="KQ.jpg" id="logo" style="BORDER-RADIUS:10px 20px 40px 80px">
   <p>我的学号是<span id="mynumber"></span>
-  </p><input type="button" id="button" value="下一个"><br>
+  </p><input type="button" id="button" value="下一个">
+  <a id="btnlogin" href="login.html">login</a>
+  <a id="btnlogout" href="#">logout</a><br>
   <img src="matrix.png">
-  <a href="login.html">login</a>
+
+
   <script>
     $(function () {
       function callback(result) {
-        $("#myname").text(result.myname);
-        $("#mynumber").text(result.mynumber);
-
+        if (result.myname) {
+          $("#myname").text(result.myname);
+          $("#mynumber").text(result.mynumber);
+          $("#btnlogin").hide();
+        } else {
+          $("#btnlogout").hide();
+        }
       }
       $.ajax("http://10.30.201.74:8585/userinfo", {
         type: "POST",
@@ -20,6 +27,16 @@
         xhrFields: { withCredentials: true },
         // data:JSON.stringify({"name":"admin"}),
         success: callback
+      })
+      $("#btnlogout").click(function(){
+        $.ajax({
+          type:"GET",
+          xhrFields: { withCredentials: true },
+          url:"http://10.30.201.74:8585/logout",
+          success:function(){
+            location.href="index.html";
+          }
+        })
       })
     })
   </script>
