@@ -21,7 +21,7 @@
           $("#btnlogout").hide();
         }
       }
-      $.ajax("http://10.30.201.74:8585/userinfo", {
+      $.ajax("http://127.0.0.1:8585/userinfo", {
         type: "POST",
         // contentType:'application/json',
         xhrFields: { withCredentials: true },
@@ -32,7 +32,7 @@
         $.ajax({
           type:"GET",
           xhrFields: { withCredentials: true },
-          url:"http://10.30.201.74:8585/logout",
+          url:"http://127.0.0.1:8585/logout",
           success:function(){
             location.href="index.html";
           }
