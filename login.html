@@ -20,7 +20,7 @@
           type: "POST",
           contentType: 'application/json',
           xhrFields: { withCredentials: true },
-          data: JSON.stringify({ "name": $("#name").val(), "pwd": $("#pwd").val() }),
+          data: JSON.stringify({ "name": $("#name").val(),"pwd": $("#pwd").val() }),
           success: function (result) {
             if (result.result == "success")
               location.href = "index.html"

@@ -1,45 +1,71 @@
 <html>
-<script src="jquery-3.4.1.js"></script>
-
 <body>
-  <h1>我叫<span id="myname"></span>.</h1><img src="KQ.jpg" id="logo" style="BORDER-RADIUS:10px 20px 40px 80px">
-  <p>我的学号是<span id="mynumber"></span>
-  </p><input type="button" id="button" value="下一个">
-  <a id="btnlogin" href="login.html">login</a>
-  <a id="btnlogout" href="#">logout</a><br>
-  <img src="matrix.png">
+<h1>我叫<span id="myname"></span></h1>
 
+    <p>我的学号是<span id="mynumber"></span>
+    </p>
+    <a id="alogin" href="login.html">去登录</a>
+    <a id="alogout" href="#">去注销</a>
 
-  <script>
-    $(function () {
-      function callback(result) {
-        if (result.myname) {
-          $("#myname").text(result.myname);
-          $("#mynumber").text(result.mynumber);
-          $("#btnlogin").hide();
-        } else {
-          $("#btnlogout").hide();
-        }
-      }
-      $.ajax("http://127.0.0.1:8585/userinfo", {
-        type: "POST",
-        // contentType:'application/json',
-        xhrFields: { withCredentials: true },
-        // data:JSON.stringify({"name":"admin"}),
-        success: callback
-      })
-      $("#btnlogout").click(function(){
-        $.ajax({
-          type:"GET",
-          xhrFields: { withCredentials: true },
-          url:"http://127.0.0.1:8585/logout",
-          success:function(){
-            location.href="index.html";
-          }
+    <input type="text" id="lvlitext">
+    <button id="btnAdd" name="addlvli">添加</button>
+    <ul id="ul"></ul>
+    <script src="jquery-3.4.1.js"></script>
+    <script>
+        $(function(){
+
+            var callback=function (result){
+                if(!result || !result.myname){
+                    $("#alogout").hide();
+                    $("#lvlitext").hide();
+                    $("#btnAdd").hide();
+                }else{
+                    $("#myname").text(result.myname);
+                    $("#mynumber").text(result.mynumber);
+                    $("#alogin").hide();
+                }
+             }
+             $.ajax({
+                type:"POST",
+                xhrFields: {
+                        withCredentials: true
+                },
+                url:"http://127.0.0.1:8585/userinfo",
+                contentType:"application/json",
+                success:callback
+             });
+
+            $("#alogout").click(function(){
+                $.ajax({
+                type:"POST",
+                xhrFields: {
+                        withCredentials: true
+                },
+                url:"http://127.0.0.1:8585/logout",
+                success:function(){
+                    location.href="index.html";
+                }
+             });
+            });
+
+            $.post("http://127.0.0.1:8585/finall",
+                function(result){
+                    for(var i=0;i<result.length;i++){
+                        $("#ul").append("<li>"+ result[i].url+"</li>")
+                    }
+            })
+
+            $("#btnAdd").click(function(){
+                $.post("http://127.0.0.1:8585/addlvli",
+                    {lvli:$("#lvlitext").val()},
+                    function(){
+                        location.href="index.html"; 
+                    })
+            })
+   
         })
-      })
-    })
-  </script>
-</body>
 
+
+    </script>
+</body>
 </html>
