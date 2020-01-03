@@ -1,19 +1,16 @@
 <html>
 <body>
 <h1>我叫<span id="myname"></span></h1>
-
     <p>我的学号是<span id="mynumber"></span>
     </p>
     <a id="alogin" href="login.html">去登录</a>
     <a id="alogout" href="#">去注销</a>
-
     <input type="text" id="lvlitext">
     <button id="btnAdd" name="addlvli">添加</button>
     <ul id="ul"></ul>
     <script src="jquery-3.4.1.js"></script>
     <script>
         $(function(){
-
             var callback=function (result){
                 if(!result || !result.myname){
                     $("#alogout").hide();
@@ -34,7 +31,6 @@
                 contentType:"application/json",
                 success:callback
              });
-
             $("#alogout").click(function(){
                 $.ajax({
                 type:"POST",
@@ -47,14 +43,12 @@
                 }
              });
             });
-
             $.post("http://127.0.0.1:8585/finall",
                 function(result){
                     for(var i=0;i<result.length;i++){
                         $("#ul").append("<li>"+ result[i].url+"</li>")
                     }
             })
-
             $("#btnAdd").click(function(){
                 $.post("http://127.0.0.1:8585/addlvli",
                     {lvli:$("#lvlitext").val()},
@@ -62,10 +56,7 @@
                         location.href="index.html"; 
                     })
             })
-   
         })
-
-
     </script>
 </body>
 </html>
